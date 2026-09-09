@@ -50,3 +50,8 @@ export const setAutoLockMinutes = (minutes: number) =>
   invoke<void>('set_auto_lock_minutes', { minutes })
 
 export const getOsUsername = () => invoke<string | null>('get_os_username')
+
+export const exportBackup = (destination: string) =>
+  invoke<void>('export_backup', { destination })
+
+export const importBackup = (source: string) => invoke<void>('import_backup', { source })

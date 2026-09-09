@@ -3,6 +3,7 @@ import { useState, type FormEvent } from 'react'
 import { Modal } from '../common/Modal'
 import { changeMasterPassword } from '../../lib/ipc'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { BackupRestoreSection } from './BackupRestoreSection'
 
 interface Props {
   onClose: () => void
@@ -139,6 +140,8 @@ export function SettingsPanel({ onClose }: Props) {
             </button>
           </form>
         </section>
+
+        <BackupRestoreSection />
       </div>
     </Modal>
   )
