@@ -9,6 +9,7 @@ import { ItemList } from '../Items/ItemList'
 import { PasswordGeneratorPanel } from '../PasswordGenerator/PasswordGeneratorPanel'
 import { SettingsPanel } from '../Settings/SettingsPanel'
 import { Sidebar } from './Sidebar'
+import { TopBar } from './TopBar'
 
 export function AppShell() {
   const refreshItems = useVaultStore((s) => s.refreshItems)
@@ -33,13 +34,16 @@ export function AppShell() {
   useIdleTimer(autoLockMinutes, () => void lock(), true)
 
   return (
-    <div className="flex h-screen bg-neutral-950 text-neutral-100">
-      <Sidebar />
-      <div className="w-80 shrink-0 border-r border-neutral-800">
-        <ItemList />
-      </div>
-      <div className="flex-1">
-        <ItemDetailPanel />
+    <div className="flex h-screen flex-col overflow-hidden">
+      <TopBar />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
+        <div className="w-88 shrink-0 border-r border-border bg-surface/40">
+          <ItemList />
+        </div>
+        <div className="flex-1 bg-surface/20">
+          <ItemDetailPanel />
+        </div>
       </div>
 
       <ItemForm />

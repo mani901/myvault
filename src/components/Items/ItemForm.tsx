@@ -57,20 +57,20 @@ function ItemFormFields() {
         {payload.kind === 'note' && <NoteFields value={payload} onChange={setPayload} />}
         {payload.kind === 'other' && <OtherFields value={payload} onChange={setPayload} />}
 
-        {itemsError && <p className="text-sm text-red-400">{itemsError}</p>}
+        {itemsError && <p className="text-sm text-danger">{itemsError}</p>}
 
         <div className="flex justify-end gap-2 pt-2">
           <button
             type="button"
             onClick={closeForm}
-            className="rounded-md border border-neutral-700 px-4 py-2 text-sm text-neutral-300 transition hover:bg-neutral-800"
+            className="rounded-xl border border-border px-4 py-2 text-sm font-semibold text-text transition hover:bg-surface-muted"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-md bg-violet-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-violet-500 disabled:opacity-50"
+            className="rounded-xl bg-linear-to-br from-gradient-from to-gradient-to px-4 py-2 text-sm font-semibold text-white shadow-md shadow-primary/25 transition hover:opacity-90 disabled:opacity-50"
           >
             {submitting ? 'Saving…' : 'Save'}
           </button>

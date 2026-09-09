@@ -48,3 +48,5 @@ export const getSettings = () => invoke<Settings>('get_settings')
 
 export const setAutoLockMinutes = (minutes: number) =>
   invoke<void>('set_auto_lock_minutes', { minutes })
+
+export const getOsUsername = () => invoke<string | null>('get_os_username')

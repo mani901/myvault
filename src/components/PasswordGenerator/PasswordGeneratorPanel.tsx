@@ -50,15 +50,15 @@ export function PasswordGeneratorPanel({ onClose }: Props) {
   return (
     <Modal title="Password generator" onClose={onClose}>
       <div className="space-y-4">
-        <div className="flex items-center gap-2 rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2">
-          <span className="flex-1 truncate font-mono text-sm text-neutral-100">{password}</span>
+        <div className="flex items-center gap-2 rounded-xl border border-border bg-surface-muted px-3 py-2.5">
+          <span className="flex-1 truncate font-mono text-sm text-text-strong">{password}</span>
           <CopyButton value={password} />
         </div>
 
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-sm text-neutral-300">
+          <div className="flex items-center justify-between text-sm text-text">
             <span>Length</span>
-            <span>{options.length}</span>
+            <span className="font-semibold text-text-strong">{options.length}</span>
           </div>
           <input
             type="range"
@@ -66,7 +66,7 @@ export function PasswordGeneratorPanel({ onClose }: Props) {
             max={64}
             value={options.length}
             onChange={(e) => update('length', Number(e.target.value))}
-            className="w-full"
+            className="w-full accent-primary"
           />
         </div>
 
@@ -94,12 +94,12 @@ export function PasswordGeneratorPanel({ onClose }: Props) {
           onChange={(v) => update('exclude_ambiguous', v)}
         />
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
 
         <button
           type="button"
           onClick={() => regenerate()}
-          className="w-full rounded-md bg-violet-600 py-2 text-sm font-medium text-white transition hover:bg-violet-500"
+          className="w-full rounded-xl bg-linear-to-br from-gradient-from to-gradient-to py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/25 transition hover:opacity-90"
         >
           Regenerate
         </button>
@@ -118,8 +118,13 @@ function Toggle({
   onChange: (v: boolean) => void
 }) {
   return (
-    <label className="flex items-center gap-2 text-sm text-neutral-300">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+    <label className="flex items-center gap-2 text-sm text-text">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="accent-primary"
+      />
       {label}
     </label>
   )

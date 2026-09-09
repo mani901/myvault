@@ -1,4 +1,4 @@
-import { TextAreaField, TextField } from '../../common/FormField'
+import { GeneratableField, TextAreaField, TextField } from '../../common/FormField'
 import { generatePassword } from '../../../lib/ipc'
 import type { ItemPayload } from '../../../types/vault'
 
@@ -36,24 +36,12 @@ export function PasswordFields({ value, onChange }: Props) {
         onChange={(v) => onChange({ ...value, username: v })}
       />
 
-      <div className="space-y-1">
-        <label className="text-sm text-neutral-300">Password</label>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={value.password}
-            onChange={(e) => onChange({ ...value, password: e.target.value })}
-            className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-sm outline-none focus:border-violet-500"
-          />
-          <button
-            type="button"
-            onClick={handleGenerate}
-            className="shrink-0 rounded-md border border-neutral-700 px-3 py-2 text-xs text-neutral-300 transition hover:bg-neutral-800"
-          >
-            Generate
-          </button>
-        </div>
-      </div>
+      <GeneratableField
+        label="Password"
+        value={value.password}
+        onChange={(v) => onChange({ ...value, password: v })}
+        onGenerate={handleGenerate}
+      />
 
       <TextField label="URL" value={value.url} onChange={(v) => onChange({ ...value, url: v })} />
       <TextAreaField

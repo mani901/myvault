@@ -1,3 +1,6 @@
+import { Lock, Settings, ShieldCheck, Wand2, type LucideIcon } from 'lucide-react'
+
+import { KIND_ICONS } from '../../lib/itemIcons'
 import { useVaultStore } from '../../stores/vaultStore'
 import { ITEM_KIND_LABELS, ITEM_KIND_ORDER } from '../../types/vault'
 
@@ -5,67 +8,79 @@ export function Sidebar() {
   const activeKind = useVaultStore((s) => s.activeKind)
   const setActiveKind = useVaultStore((s) => s.setActiveKind)
   const itemCounts = useVaultStore((s) => s.itemCounts)
-  const searchQuery = useVaultStore((s) => s.searchQuery)
-  const setSearchQuery = useVaultStore((s) => s.setSearchQuery)
-  const openCreateForm = useVaultStore((s) => s.openCreateForm)
   const openGenerator = useVaultStore((s) => s.openGenerator)
   const openSettings = useVaultStore((s) => s.openSettings)
   const lock = useVaultStore((s) => s.lock)
 
   return (
-    <div className="flex h-full w-60 shrink-0 flex-col gap-4 border-r border-neutral-800 bg-neutral-950 p-4">
-      <input
-        type="search"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search…"
-        className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm outline-none focus:border-violet-500"
-      />
-
-      <nav className="flex-1 space-y-1 overflow-y-auto">
-        {ITEM_KIND_ORDER.map((kind) => (
-          <button
-            key={kind}
-            onClick={() => setActiveKind(kind)}
-            className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition ${
-              activeKind === kind
-                ? 'bg-violet-600/20 text-neutral-100'
-                : 'text-neutral-300 hover:bg-neutral-900'
-            }`}
-          >
-            <span>{ITEM_KIND_LABELS[kind].plural}</span>
-            <span className="text-xs text-neutral-500">{itemCounts[kind] ?? 0}</span>
-          </button>
-        ))}
+    <div className="flex h-full w-64 shrink-0 flex-col gap-6 border-r border-border bg-surface/60 p-5">
+      <nav className="space-y-1">
+        {ITEM_KIND_ORDER.map((kind) => {
+          const Icon = KIND_ICONS[kind]
+          const active = activeKind === kind
+          return (
+            <button
+              key={kind}
+              onClick={() => setActiveKind(kind)}
+              className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                active
+                  ? 'bg-primary-soft text-text-strong'
+                  : 'text-text hover:bg-surface-muted'
+              }`}
+            >
+              <Icon
+                className={`h-4 w-4 shrink-0 ${active ? 'text-primary' : 'text-text-muted'}`}
+              />
+              <span className="flex-1 text-left">{ITEM_KIND_LABELS[kind].plural}</span>
+              <span
+                className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                  active
+                    ? 'bg-primary text-white'
+                    : 'bg-surface-muted text-text-muted'
+                }`}
+              >
+                {itemCounts[kind] ?? 0}
+              </span>
+            </button>
+          )
+        })}
       </nav>
 
-      <button
-        onClick={openCreateForm}
-        className="w-full rounded-md bg-violet-600 py-2 text-sm font-medium text-white transition hover:bg-violet-500"
-      >
-        + New {ITEM_KIND_LABELS[activeKind].singular}
-      </button>
+      <div className="space-y-1 border-t border-border pt-4">
+        <SidebarAction icon={Wand2} label="Password generator" onClick={openGenerator} />
+        <SidebarAction icon={Settings} label="Settings" onClick={openSettings} />
+        <SidebarAction icon={Lock} label="Lock vault" onClick={() => void lock()} />
+      </div>
 
-      <div className="space-y-1 border-t border-neutral-800 pt-3">
-        <button
-          onClick={openGenerator}
-          className="w-full rounded-md px-3 py-2 text-left text-sm text-neutral-300 transition hover:bg-neutral-900"
-        >
-          Password generator
-        </button>
-        <button
-          onClick={openSettings}
-          className="w-full rounded-md px-3 py-2 text-left text-sm text-neutral-300 transition hover:bg-neutral-900"
-        >
-          Settings
-        </button>
-        <button
-          onClick={() => void lock()}
-          className="w-full rounded-md px-3 py-2 text-left text-sm text-neutral-300 transition hover:bg-neutral-900"
-        >
-          Lock vault
-        </button>
+      <div className="mt-auto rounded-2xl border border-primary-soft-strong bg-linear-to-br from-primary-soft to-transparent p-4">
+        <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-linear-to-br from-gradient-from to-gradient-to">
+          <ShieldCheck className="h-4 w-4 text-white" />
+        </div>
+        <div className="text-sm font-bold text-text-strong">Stay secure</div>
+        <p className="mt-1 text-xs leading-relaxed text-text-muted">
+          Your data is encrypted locally on this device.
+        </p>
       </div>
     </div>
+  )
+}
+
+function SidebarAction({
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  icon: LucideIcon
+  label: string
+  onClick: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-text transition hover:bg-surface-muted"
+    >
+      <Icon className="h-4 w-4 shrink-0 text-text-muted" />
+      {label}
+    </button>
   )
 }

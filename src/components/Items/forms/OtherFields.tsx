@@ -32,26 +32,26 @@ export function OtherFields({ value, onChange }: Props) {
       />
 
       <div className="space-y-2">
-        <label className="text-sm text-neutral-300">Fields</label>
+        <label className="text-sm font-medium text-text">Fields</label>
         {value.fields.map(([key, val], i) => (
           <div key={i} className="flex gap-2">
             <input
               value={key}
               onChange={(e) => updateField(i, e.target.value, val)}
               placeholder="Name"
-              className="w-1/3 rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-sm outline-none focus:border-violet-500"
+              className="w-1/3 rounded-xl border border-border bg-surface-muted px-2 py-1.5 text-sm text-text-strong outline-none transition placeholder:text-text-muted focus:border-primary"
             />
             <input
               value={val}
               onChange={(e) => updateField(i, key, e.target.value)}
               placeholder="Value"
-              className="flex-1 rounded-md border border-neutral-700 bg-neutral-950 px-2 py-1.5 text-sm outline-none focus:border-violet-500"
+              className="flex-1 rounded-xl border border-border bg-surface-muted px-2 py-1.5 text-sm text-text-strong outline-none transition placeholder:text-text-muted focus:border-primary"
             />
             <button
               type="button"
               onClick={() => removeField(i)}
               aria-label="Remove field"
-              className="rounded-md border border-neutral-700 px-2 text-xs text-neutral-400 transition hover:bg-neutral-800"
+              className="rounded-xl border border-border px-2 text-xs text-text-muted transition hover:bg-surface-muted"
             >
               ✕
             </button>
@@ -60,7 +60,7 @@ export function OtherFields({ value, onChange }: Props) {
         <button
           type="button"
           onClick={addField}
-          className="text-xs text-violet-400 transition hover:text-violet-300"
+          className="text-xs font-semibold text-primary transition hover:text-primary-hover"
         >
           + Add field
         </button>

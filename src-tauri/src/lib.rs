@@ -52,6 +52,7 @@ pub fn run() {
             commands::generator::generate_password,
             commands::settings::get_settings,
             commands::settings::set_auto_lock_minutes,
+            commands::system::get_os_username,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

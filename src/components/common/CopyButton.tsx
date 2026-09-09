@@ -1,3 +1,4 @@
+import { Copy } from 'lucide-react'
 import { useState } from 'react'
 
 import { copyWithAutoClear } from '../../lib/clipboard'
@@ -22,8 +23,9 @@ export function CopyButton({ value, label = 'Copy', className = '' }: CopyButton
     <button
       type="button"
       onClick={handleClick}
-      className={`rounded-md border border-neutral-700 px-2 py-1 text-xs text-neutral-300 transition hover:bg-neutral-800 ${className}`}
+      className={`flex items-center gap-1.5 rounded-lg bg-primary-soft px-2.5 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary-soft-strong ${className}`}
     >
+      <Copy className="h-3.5 w-3.5" />
       {copied ? 'Copied' : label}
     </button>
   )

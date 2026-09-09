@@ -10,6 +10,9 @@ interface Props {
 
 const AUTO_LOCK_OPTIONS = [1, 5, 10, 15, 30, 60]
 
+const passwordInputClass =
+  'w-full rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm text-text-strong outline-none transition placeholder:text-text-muted focus:border-primary'
+
 export function SettingsPanel({ onClose }: Props) {
   const autoLockMinutes = useSettingsStore((s) => s.autoLockMinutes)
   const setAutoLockMinutes = useSettingsStore((s) => s.setAutoLockMinutes)
@@ -56,11 +59,11 @@ export function SettingsPanel({ onClose }: Props) {
     <Modal title="Settings" onClose={onClose}>
       <div className="space-y-6">
         <section className="space-y-2">
-          <h3 className="text-sm font-medium text-neutral-200">Auto-lock</h3>
+          <h3 className="text-sm font-bold text-text-strong">Auto-lock</h3>
           <select
             value={autoLockMinutes}
             onChange={(e) => void setAutoLockMinutes(Number(e.target.value))}
-            className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm outline-none focus:border-violet-500"
+            className="w-full rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm text-text-strong outline-none transition focus:border-primary"
           >
             {AUTO_LOCK_OPTIONS.map((m) => (
               <option key={m} value={m}>
@@ -70,65 +73,67 @@ export function SettingsPanel({ onClose }: Props) {
           </select>
         </section>
 
-        <section className="space-y-2 border-t border-neutral-800 pt-4">
+        <section className="space-y-2 border-t border-border pt-4">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <h3 className="text-sm font-medium text-neutral-200">Quick unlock</h3>
-              <p className="text-xs text-neutral-400">
+              <h3 className="text-sm font-bold text-text-strong">Quick unlock</h3>
+              <p className="text-xs text-text-muted">
                 Skips the master password using this OS account&rsquo;s keychain.
               </p>
             </div>
             <button
               onClick={() => void (quickUnlockEnabled ? disableQuickUnlock() : enableQuickUnlock())}
               disabled={quickUnlockBusy}
-              className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition disabled:opacity-50 ${
+              className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition disabled:opacity-50 ${
                 quickUnlockEnabled
-                  ? 'bg-violet-600 text-white hover:bg-violet-500'
-                  : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
+                  ? 'bg-primary text-white hover:bg-primary-hover'
+                  : 'bg-surface-muted text-text-muted hover:bg-primary-soft'
               }`}
             >
               {quickUnlockEnabled ? 'Enabled' : 'Disabled'}
             </button>
           </div>
           {quickUnlockEnabled && (
-            <p className="text-xs text-amber-400">
+            <p className="text-xs text-amber-500 dark:text-amber-400">
               Anyone signed into this OS account can open the vault without the master
               password.
             </p>
           )}
-          {error && <p className="text-xs text-red-400">{error}</p>}
+          {error && <p className="text-xs text-danger">{error}</p>}
         </section>
 
-        <section className="space-y-2 border-t border-neutral-800 pt-4">
-          <h3 className="text-sm font-medium text-neutral-200">Change master password</h3>
+        <section className="space-y-2 border-t border-border pt-4">
+          <h3 className="text-sm font-bold text-text-strong">Change master password</h3>
           <form onSubmit={handleChangePassword} className="space-y-2">
             <input
               type="password"
               placeholder="Current password"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm outline-none focus:border-violet-500"
+              className={passwordInputClass}
             />
             <input
               type="password"
               placeholder="New password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm outline-none focus:border-violet-500"
+              className={passwordInputClass}
             />
             <input
               type="password"
               placeholder="Confirm new password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm outline-none focus:border-violet-500"
+              className={passwordInputClass}
             />
-            {changeError && <p className="text-sm text-red-400">{changeError}</p>}
-            {changeSuccess && <p className="text-sm text-emerald-400">Password changed.</p>}
+            {changeError && <p className="text-sm text-danger">{changeError}</p>}
+            {changeSuccess && (
+              <p className="text-sm text-emerald-600 dark:text-emerald-400">Password changed.</p>
+            )}
             <button
               type="submit"
               disabled={changing}
-              className="w-full rounded-md bg-violet-600 py-2 text-sm font-medium text-white transition hover:bg-violet-500 disabled:opacity-50"
+              className="w-full rounded-xl bg-linear-to-br from-gradient-from to-gradient-to py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/25 transition hover:opacity-90 disabled:opacity-50"
             >
               {changing ? 'Changing…' : 'Change password'}
             </button>

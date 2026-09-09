@@ -1,4 +1,4 @@
-import { TextField } from '../../common/FormField'
+import { GeneratableField, TextField } from '../../common/FormField'
 import { generatePassword } from '../../../lib/ipc'
 import type { ItemPayload } from '../../../types/vault'
 
@@ -42,24 +42,12 @@ export function ApiKeyFields({ value, onChange }: Props) {
         mono
       />
 
-      <div className="space-y-1">
-        <label className="text-sm text-neutral-300">Secret (optional)</label>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={value.secret ?? ''}
-            onChange={(e) => onChange({ ...value, secret: e.target.value || null })}
-            className="w-full rounded-md border border-neutral-700 bg-neutral-950 px-3 py-2 font-mono text-sm outline-none focus:border-violet-500"
-          />
-          <button
-            type="button"
-            onClick={handleGenerateSecret}
-            className="shrink-0 rounded-md border border-neutral-700 px-3 py-2 text-xs text-neutral-300 transition hover:bg-neutral-800"
-          >
-            Generate
-          </button>
-        </div>
-      </div>
+      <GeneratableField
+        label="Secret (optional)"
+        value={value.secret ?? ''}
+        onChange={(v) => onChange({ ...value, secret: v || null })}
+        onGenerate={handleGenerateSecret}
+      />
 
       <TextField
         label="Environment"

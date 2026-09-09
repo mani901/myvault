@@ -1,1 +1,103 @@
 @import "tailwindcss";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+@import "@fontsource/caveat/600.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f3f1fc;
+  --blob-a: #c7d2fe;
+  --blob-b: #f5d0fe;
+  --surface: #ffffff;
+  --surface-muted: #f8f7fd;
+  --border: #e7e4f6;
+  --text-strong: #1b1834;
+  --text: #4b4867;
+  --text-muted: #7a778f;
+  --primary: #6d5bf6;
+  --primary-hover: #5c4bea;
+  --primary-soft: #eeebff;
+  --primary-soft-strong: #e1dcff;
+  --gradient-from: #5b7cfa;
+  --gradient-to: #8b5cf6;
+  --danger: #dc2626;
+  --danger-soft: #fef0ef;
+  --info-icon: #2563eb;
+  --info-soft: #dbeafe;
+}
+
+.dark {
+  --bg: #100f1e;
+  --blob-a: #2e2a5c;
+  --blob-b: #3b2a55;
+  --surface: #1a1830;
+  --surface-muted: #15142a;
+  --border: #2a2846;
+  --text-strong: #f3f1ff;
+  --text: #c9c6e0;
+  --text-muted: #8b87a8;
+  --primary: #8c7dfb;
+  --primary-hover: #9d90fc;
+  --primary-soft: rgb(140 125 251 / 16%);
+  --primary-soft-strong: rgb(140 125 251 / 28%);
+  --gradient-from: #6d8dff;
+  --gradient-to: #a78bfa;
+  --danger: #f87171;
+  --danger-soft: rgb(248 113 113 / 14%);
+  --info-icon: #60a5fa;
+  --info-soft: rgb(96 165 250 / 16%);
+}
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-text-strong: var(--text-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-strong: var(--primary-soft-strong);
+  --color-gradient-from: var(--gradient-from);
+  --color-gradient-to: var(--gradient-to);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info-icon: var(--info-icon);
+  --color-info-soft: var(--info-soft);
+  --color-blob-a: var(--blob-a);
+  --color-blob-b: var(--blob-b);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: radial-gradient(
+      circle at 12% -10%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 100% 105%,
+      color-mix(in srgb, var(--gradient-to) 20%, transparent),
+      transparent 48%
+    ),
+    var(--color-bg);
+  min-height: 100vh;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+::selection {
+  background: var(--primary-soft-strong);
+}
