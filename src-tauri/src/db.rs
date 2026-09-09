@@ -100,6 +100,14 @@ pub fn update_wrapped_dek(
     Ok(())
 }
 
+pub fn set_auto_lock_minutes(conn: &Connection, minutes: i64) -> Result<(), AppError> {
+    conn.execute(
+        "UPDATE meta SET auto_lock_minutes = ?1 WHERE id = 1",
+        params![minutes],
+    )?;
+    Ok(())
+}
+
 pub fn set_quick_unlock_enabled(conn: &Connection, enabled: bool) -> Result<(), AppError> {
     conn.execute(
         "UPDATE meta SET quick_unlock_enabled = ?1 WHERE id = 1",

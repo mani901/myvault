@@ -50,6 +50,8 @@ pub fn run() {
             commands::items::delete_item,
             commands::items::item_counts,
             commands::generator::generate_password,
+            commands::settings::get_settings,
+            commands::settings::set_auto_lock_minutes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
