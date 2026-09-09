@@ -5,6 +5,7 @@ export type ItemPayload =
       kind: 'password'
       title: string
       username: string
+      email: string
       password: string
       url: string
       notes: string
@@ -75,7 +76,7 @@ export const ITEM_KIND_LABELS: Record<ItemKind, { plural: string; singular: stri
 export function emptyPayload(kind: ItemKind): ItemPayload {
   switch (kind) {
     case 'password':
-      return { kind, title: '', username: '', password: '', url: '', notes: '' }
+      return { kind, title: '', username: '', email: '', password: '', url: '', notes: '' }
     case 'bookmark':
       return { kind, title: '', url: '', tags: [] }
     case 'api_key':

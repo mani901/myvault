@@ -6,6 +6,8 @@ pub enum ItemPayload {
     Password {
         title: String,
         username: String,
+        #[serde(default)]
+        email: String,
         password: String,
         url: String,
         notes: String,

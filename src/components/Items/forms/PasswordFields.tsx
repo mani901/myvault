@@ -35,6 +35,12 @@ export function PasswordFields({ value, onChange }: Props) {
         value={value.username}
         onChange={(v) => onChange({ ...value, username: v })}
       />
+      <TextField
+        label="Email"
+        value={value.email}
+        onChange={(v) => onChange({ ...value, email: v })}
+        placeholder="e.g. alice@example.com"
+      />
 
       <GeneratableField
         label="Password"

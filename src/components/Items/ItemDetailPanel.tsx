@@ -63,6 +63,7 @@ export function ItemDetailPanel() {
         {payload.kind === 'password' && (
           <>
             <DetailRow label="Username" value={payload.username} copyable />
+            <DetailRow label="Email" value={payload.email} copyable />
             <DetailRow label="Password" value={payload.password} copyable mono masked />
             <DetailRow label="URL" value={payload.url} copyable />
             {payload.notes && <DetailRow label="Notes" value={payload.notes} multiline />}

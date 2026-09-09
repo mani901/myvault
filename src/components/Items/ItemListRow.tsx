@@ -39,7 +39,7 @@ export function ItemListRow({ item, selected, onSelect }: Props) {
 function itemSubtitle(item: ItemDto): string {
   switch (item.payload.kind) {
     case 'password':
-      return item.payload.username || item.payload.url
+      return item.payload.username || item.payload.email || item.payload.url
     case 'bookmark':
       return item.payload.url
     case 'api_key':

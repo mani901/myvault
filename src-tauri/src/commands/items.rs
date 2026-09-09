@@ -39,9 +39,10 @@ fn payload_matches(payload: &ItemPayload, needle: &str) -> bool {
         ItemPayload::Password {
             title,
             username,
+            email,
             url,
             ..
-        } => format!("{title} {username} {url}"),
+        } => format!("{title} {username} {email} {url}"),
         ItemPayload::Bookmark { title, url, tags } => {
             format!("{title} {url} {}", tags.join(" "))
         }
@@ -212,6 +213,7 @@ mod tests {
         ItemPayload::Password {
             title: title.to_string(),
             username: "alice".into(),
+            email: "alice@example.com".into(),
             password: "s3cr3t".into(),
             url: "https://example.com".into(),
             notes: String::new(),
