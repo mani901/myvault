@@ -1,8 +1,29 @@
 {
   "name": "myvault",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "description": "MyVault — a local-first, offline password manager and encrypted secrets vault for Windows, macOS & Linux. Built with Tauri, Rust & React.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mani901/myvault.git"
+  },
+  "keywords": [
+    "password-manager",
+    "secrets-manager",
+    "vault",
+    "encryption",
+    "offline",
+    "local-first",
+    "privacy",
+    "tauri",
+    "rust",
+    "react",
+    "desktop-app",
+    "aes-256-gcm",
+    "argon2"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

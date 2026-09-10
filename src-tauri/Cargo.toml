@@ -1,10 +1,10 @@
 [package]
 name = "app"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+description = "MyVault — a local-first, offline password manager and encrypted secrets vault."
+authors = ["mani901"]
+license = "MIT"
+repository = "https://github.com/mani901/myvault"
 edition = "2021"
 rust-version = "1.85"
 
