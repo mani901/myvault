@@ -13,6 +13,10 @@ Windows · macOS · Linux — built with [Tauri](https://tauri.app), [Rust](http
 ![Encryption](https://img.shields.io/badge/crypto-AES--256--GCM%20%2B%20Argon2id-1b1834)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
+<br>
+
+<img src="docs/myvalut.png" alt="MyVault open-source offline password manager — encrypted vault with passwords, API keys, secure notes and bookmarks" width="880">
+
 </div>
 
 ---
